@@ -1,8 +1,15 @@
-// Pedir el nombre del usuario cuando entra en la página
 window.onload = function() {
-    const nombreUsuario = prompt("¡Bienvenido al Festival! ¿Cuál es tu nombre?");
-    if (nombreUsuario) {
-        document.getElementById('bienvenida').innerHTML = `<h2>¡Hola, ${nombreUsuario}! Bienvenido al Festival de Música 2024</h2>`;
+    // Verificar si el nombre ya está almacenado en localStorage
+    const nombreGuardado = localStorage.getItem('nombreUsuario');
+    if (!nombreGuardado) {
+        const nombreUsuario = prompt("¡Bienvenido al Festival! ¿Cuál es tu nombre?");
+        if (nombreUsuario) {
+            localStorage.setItem('nombreUsuario', nombreUsuario); // Guardar el nombre en localStorage
+            document.getElementById('bienvenida').innerHTML = `<h2>¡Hola, ${nombreUsuario}! Bienvenido al Festival de Música 2024</h2>`;
+        }
+    } else {
+        // Mostrar el saludo si ya hay un nombre guardado
+        document.getElementById('bienvenida').innerHTML = `<h2>¡Hola, ${nombreGuardado}! Bienvenido al Festival de Música 2024</h2>`;
     }
 }
 
@@ -15,3 +22,4 @@ document.getElementById('compraEntradas').addEventListener('submit', function(ev
         console.log("Entradas compradas con éxito");
     }
 });
+;
